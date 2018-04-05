@@ -236,7 +236,15 @@
                     // for (var i = 0; i < 2; i++) {
                     //     formatTable(response.items[i]);
                     // }
-                    formatTable(response.items[0], response.items[1]);
+
+                    var eventStartTime = response.items[0].start.dateTime ? response.items[0].start.dateTime : response.items[0].start.date;
+                    var startTime = new Date(eventStartTime);
+                    console.log(startTime);
+                    if (startTime > Date.now()){
+                        formatTable(0, response.items[1]);
+                    }else{
+                        formatTable(response.items[0], response.items[1]);
+                    }
 
                     if ("none" != "none") {
                     $("#data").autoScroll({
@@ -255,92 +263,97 @@
                 }
 
                 function formatTable(event, nextEvent) {
+                    var div = $("#events");
 
-                var startDateTime = event.start.dateTime ? event.start.dateTime : event.start.date;
-                var endDateTime = event.end.dateTime ? event.end.dateTime : event.end.date;
+                    if (event !== 0){
+                        var startDateTime = event.start.dateTime ? event.start.dateTime : event.start.date;
+                        var endDateTime = event.end.dateTime ? event.end.dateTime : event.end.date;
 
-                var nextStartDateTime = nextEvent.start.dateTime ? nextEvent.start.dateTime : nextEvent.start.date;
-                var nextEndDateTime = nextEvent.end.dateTime ? nextEvent.end.dateTime : nextEvent.end.date;
+                        var isAllDay = false;
+                        if (startDateTime) {
+                            if (event.start.date) {
+                            isAllDay = true;
+                            }
+                        }
 
-                var isAllDay = false;
-                if (startDateTime) {
-                    if (event.start.date) {
-                    isAllDay = true;
+                        h2 = $("<h2 class=\"where\"/>");
+                        $(h2).text(event.location);
+                        $(div).append(h2);
+
+                        h1 = $("<h1 class=\"title\"/>");
+                        h1.text(event.summary);
+                        $(div).append(h1);
+
+                        var sd = moment(startDateTime).format("__MSG_Calendar_DateFormat__");
+                        var st = moment(startDateTime).format("__MSG_Calendar_TimeFormat__");
+                        var et = moment(endDateTime).format("__MSG_Calendar_TimeFormat__");
+
+                        if (isAllDay) {
+                            var ed = moment(endDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
+                        } else {
+                            var ed = moment(endDateTime).format("__MSG_Calendar_DateFormat__");
+                        }
+
+                        var p = $("<p class=\"date\"/>");
+
+                        var time = '';
+                        if (sd == ed) {
+                            time += sd;
+                        } else {
+                            time += sd + " - " + ed;
+                        }
+                        if (isAllDay) {
+                            p.text(time);
+                        } else {
+                            p.text(time + ", " + st + " - " + et);
+                        }
+                        $(div).append(p);
+
+                    }else {
+                        h2 = $("<h2 class=\"where\"/>");
+                        $(h2).text(nextEvent.location);
+                        $(div).append(h2);
+
+                        h1 = $("<h1 class=\"title\"/>");
+                        h1.text("Available");
+                        $(div).append(h1);
                     }
-                }
 
-                var nextIsAllDay = false;
-                if (nextStartDateTime) {
-                    if (nextEvent.start.date) {
-                    nextIsAllDay = true;
+                    var nextStartDateTime = nextEvent.start.dateTime ? nextEvent.start.dateTime : nextEvent.start.date;
+                    var nextEndDateTime = nextEvent.end.dateTime ? nextEvent.end.dateTime : nextEvent.end.date;
+
+                    var nextIsAllDay = false;
+                    if (nextStartDateTime) {
+                        if (nextEvent.start.date) {
+                        nextIsAllDay = true;
+                        }
                     }
-                }
 
-                //var tbody = $("<tbody></tbody>");
-                var div = $("#events");
-                var p2 = $('<p/>');
-
-                h2 = $("<h2 class=\"where\"/>");
-                $(h2).text(event.location);
-                $(div).append(h2);
-
-                h1 = $("<h1 class=\"title\"/>");
-                h1.text(event.summary);
-                $(div).append(h1);
-
-                var sd = moment(startDateTime).format("__MSG_Calendar_DateFormat__");
-                var st = moment(startDateTime).format("__MSG_Calendar_TimeFormat__");
-                var et = moment(endDateTime).format("__MSG_Calendar_TimeFormat__");
-
-                var nsd = moment(nextStartDateTime).format("__MSG_Calendar_DateFormat__");
-                var nst = moment(nextStartDateTime).format("__MSG_Calendar_TimeFormat__");
-                var net = moment(nextEndDateTime).format("__MSG_Calendar_TimeFormat__");
-
-                if (isAllDay) {
-                    var ed = moment(endDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
-                } else {
-                    var ed = moment(endDateTime).format("__MSG_Calendar_DateFormat__");
-                }
-
-                if (nextIsAllDay) {
-                    var ned = moment(nextEndDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
-                } else {
-                    var ned = moment(nextEndDateTime).format("__MSG_Calendar_DateFormat__");
-                }
-
-                var p = $("<p class=\"date\"/>");
-
-                var time = '';
-                if (sd == ed) {
-                    time += sd;
-                } else {
-                    time += sd + " - " + ed;
-                }
-                if (isAllDay) {
-                    p.text(time);
-                } else {
-                    p.text(time + ", " + st + " - " + et);
-                }
-                $(div).append(p);
-
-                var p2 = $("<p class=\"date\"/>");
-
-                var time2 = "";
-                if (nsd == ned) {
-                    time2 += nsd;
-                } else {
-                    time2 += nsd + " - " + ned;
-                }
-                if (isAllDay) {
-                    p2.text(time2);
-                } else {
-                    p2.text("Next Event: " + nextEvent.summary + " " + time2 +  ", " + nst + " - " + net);
-                }
-                $(div).append(p2);
+                    var nsd = moment(nextStartDateTime).format("__MSG_Calendar_DateFormat__");
+                    var nst = moment(nextStartDateTime).format("__MSG_Calendar_TimeFormat__");
+                    var net = moment(nextEndDateTime).format("__MSG_Calendar_TimeFormat__");
 
 
-                //$(tbody).append(tr);
-                //$(tbody).hide().appendTo("#data > table").fadeIn();
+                    if (nextIsAllDay) {
+                        var ned = moment(nextEndDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
+                    } else {
+                        var ned = moment(nextEndDateTime).format("__MSG_Calendar_DateFormat__");
+                    }
+
+                    var p2 = $("<p class=\"date\"/>");
+
+                    var time2 = "";
+                    if (nsd == ned) {
+                        time2 += nsd;
+                    } else {
+                        time2 += nsd + " - " + ned;
+                    }
+                    if (isAllDay) {
+                        p2.text(time2);
+                    } else {
+                        p2.text("Next Event: " + nextEvent.summary + " " + time2 + ", " + nst + " - " + net);
+                    }
+                    $(div).append(p2);
                 }
 
                 var docIdFromUrl = function (url) { return url.match(/[-\w]{25,}/); }
