@@ -190,8 +190,8 @@
                 setInterval(update, 120000);
             }
 
-            //gadgets.util.registerOnLoadHandler(load);
-            window.onload = load;
+            gadgets.util.registerOnLoadHandler(load);
+            //window.onload = load;
             </script>
 
             <script type="text/javascript">
