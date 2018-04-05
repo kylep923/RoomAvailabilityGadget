@@ -254,7 +254,7 @@
                     var startTime = new Date(eventStartTime);
                     console.log(startTime);
                     if (startTime > Date.now()){
-                        formatTable(0, response.items[1]);
+                        formatTable(0, response.items[0]);
                     }else{
                         formatTable(response.items[0], response.items[1]);
                     }
