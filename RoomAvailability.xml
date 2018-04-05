@@ -69,6 +69,7 @@
 
         #events
         {
+          padding: 10% 10% 10% 10%;
           color: #__UP_ForeColor__;
           width: __UP_rdW__px;
         }
