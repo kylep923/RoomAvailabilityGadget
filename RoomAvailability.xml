@@ -56,7 +56,7 @@
 
         #data
         {
-          padding: 10% 10% 10% 10%;
+          padding: 5% 5% 5% 5%;
           background-color: #__UP_BackColor__;
           height: __UP_rdH__px;
         }
