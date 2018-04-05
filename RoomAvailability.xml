@@ -334,7 +334,7 @@
                 if (isAllDay) {
                     p2.text(time2);
                 } else {
-                    p2.text(time2 + nextEvent.summary + ", " + nst + " - " + net);
+                    p2.text("Next Event: " + nextEvent.summary + ", " + nst + " - " + net);
                 }
                 $(div).append(p2);
 
