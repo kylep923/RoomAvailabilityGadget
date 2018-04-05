@@ -303,9 +303,9 @@
                 }
 
                 if (nextIsAllDay) {
-                    var ned = moment(endDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
+                    var ned = moment(nextEndDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
                 } else {
-                    var ned = moment(endDateTime).format("__MSG_Calendar_DateFormat__");
+                    var ned = moment(nextEndDateTime).format("__MSG_Calendar_DateFormat__");
                 }
 
                 var p = $("<p class=\"date\"/>");
