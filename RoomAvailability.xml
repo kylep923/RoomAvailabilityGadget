@@ -288,13 +288,13 @@
                 h1.text(event.summary);
                 $(div).append(h1);
 
-                var sd = moment(startDateTime)
-                var st = moment(startDateTime)
-                var et = moment(endDateTime)
+                var sd = moment(startDateTime).format("__MSG_Calendar_DateFormat__");
+                var st = moment(startDateTime).format("__MSG_Calendar_TimeFormat__");
+                var et = moment(endDateTime).format("__MSG_Calendar_TimeFormat__");
 
-                var nsd = moment(nextStartDateTime)
-                var nst = moment(nextStartDateTime)
-                var net = moment(nextEndDateTime)
+                var nsd = moment(nextStartDateTime).format("__MSG_Calendar_DateFormat__");
+                var nst = moment(nextStartDateTime).format("__MSG_Calendar_TimeFormat__");
+                var net = moment(nextEndDateTime).format("__MSG_Calendar_TimeFormat__");
 
                 if (isAllDay) {
                     var ed = moment(endDateTime).subtract('days', 1).format("__MSG_Calendar_DateFormat__");
