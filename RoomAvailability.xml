@@ -202,9 +202,9 @@
                 if (true == false) {
                 $("#events > table > thead").hide();
                 }
-                update();
+                getCalendarData();
 
-                setInterval(update, 120000);
+                setInterval(update, 60000);
             }
 
             gadgets.util.registerOnLoadHandler(load);
@@ -214,72 +214,76 @@
             <script type="text/javascript">
 
                 function update() {
-
-                var key = 'AIzaSyDN8dkir1si9vMwWJYz64YCsUIhFustgL8';
-                var queryParams = '&singleEvents=true&maxResults=' + "365" + '&orderBy=startTime';
-
-                var dfMin = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.000ZZ");
-                var dfMax = new SimpleDateFormat("yyyy-MM-dd'T'23:59:59.000ZZ");
-
-                var tomorrow = new Date();
-                tomorrow.setDate(new Date().getDate() + "365");
-                var min = dfMin.format(new Date());
-                var max = dfMax.format(tomorrow);
-
-                queryParams += '&timeMin=' + encodeURIComponent(min);
-                queryParams += '&timeMax=' + encodeURIComponent(max);
-
-                if (prefs.getString("searchQuery") != '') {
-                  queryParams += '&q=' + encodeURIComponent(prefs.getString("searchQuery"));
+                    var currTime = new Date();
+                    var minutes = currTime.getMinutes();
+                    if (minutes.valueOf() == 0 || minutes.valueOf() == 30){
+                        console.log("UPDATING AT: " + minutes + " MIN");
+                        getCalendarData();
+                    }else{
+                        console.log("NO UPDATE AT: " + minutes + " MIN");
+                    }
                 }
 
-                var url = 'https://www.googleapis.com/calendar/v3/calendars/' + googleUrl("h4ncmnfsieg6mgrknsjqq5f39o@group.calendar.google.com") + '/events?key=' + key + queryParams;
+                function getCalendarData() {
 
-                // if ("table" != "table") {
-                $("#events").empty();
-                // } else {
-                //     $("#events > table > tbody").empty();
-                // }
+                    var key = 'AIzaSyDN8dkir1si9vMwWJYz64YCsUIhFustgL8';
+                    var queryParams = '&singleEvents=true&maxResults=' + "365" + '&orderBy=startTime';
 
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    dataType: 'json'
-                })
-                .done(function(response) {
-                    if (response.timeZone) {
-                    //moment.tz.setDefault(response.timeZone);
+                    var dfMin = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.000ZZ");
+                    var dfMax = new SimpleDateFormat("yyyy-MM-dd'T'23:59:59.000ZZ");
+
+                    var tomorrow = new Date();
+                    tomorrow.setDate(new Date().getDate() + "365");
+                    var min = dfMin.format(new Date());
+                    var max = dfMax.format(tomorrow);
+
+                    queryParams += '&timeMin=' + encodeURIComponent(min);
+                    queryParams += '&timeMax=' + encodeURIComponent(max);
+
+                    if (prefs.getString("searchQuery") != '') {
+                    queryParams += '&q=' + encodeURIComponent(prefs.getString("searchQuery"));
                     }
-                    // for (var i = 0; i < 2; i++) {
-                    //     formatTable(response.items[i]);
+
+                    var url = 'https://www.googleapis.com/calendar/v3/calendars/' + googleUrl("h4ncmnfsieg6mgrknsjqq5f39o@group.calendar.google.com") + '/events?key=' + key + queryParams;
+
+                    // if ("table" != "table") {
+                    $("#events").empty();
+                    // } else {
+                    //     $("#events > table > tbody").empty();
                     // }
 
-                    var eventStartTime = response.items[0].start.dateTime ? response.items[0].start.dateTime : response.items[0].start.date;
-                    var startTime = new Date(eventStartTime);
-                    console.log(startTime);
-                    if (startTime > Date.now()){
-                        formatTable(0, response.items[0]);
-                    }else{
-                        formatTable(response.items[0], response.items[1]);
-                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        dataType: 'json'
+                    })
+                    .done(function(response) {
+                        var eventStartTime = response.items[0].start.dateTime ? response.items[0].start.dateTime : response.items[0].start.date;
+                        var startTime = new Date(eventStartTime);
+                        console.log(startTime);
+                        if (startTime > Date.now()){
+                            formatDiv(0, response.items[0]);
+                        }else{
+                            formatDiv(response.items[0], response.items[1]);
+                        }
 
-                    if ("none" != "none") {
-                    $("#data").autoScroll({
-                        speed: "medium",
-                        by: "continiuous"
-                    }).on("done", function() {
+                        if ("none" != "none") {
+                        $("#data").autoScroll({
+                            speed: "medium",
+                            by: "continiuous"
+                        }).on("done", function() {
+                            $("#data").data("plugin_autoScroll").play();
+                        });
                         $("#data").data("plugin_autoScroll").play();
+                        }
+                    })
+                    .fail(function(xhr, err) {
+                        console.log(url);
+                        console.log('get calendar failed: ' + xhr.responseText);
                     });
-                    $("#data").data("plugin_autoScroll").play();
-                    }
-                })
-                .fail(function(xhr, err) {
-                    console.log(url);
-                    console.log('get calendar failed: ' + xhr.responseText);
-                });
                 }
 
-                function formatTable(event, nextEvent) {
+                function formatDiv(event, nextEvent) {
                     var div = $("#events");
 
                     if (event !== 0){
