@@ -269,7 +269,7 @@
 
                         h1 = $("<h1 />");
                         h1.text(currentEvent.summary);
-                        $(currentEvent).append(h1);
+                        $(event).append(h1);
 
                         var sd = moment(startDateTime).format("__MSG_Calendar_DateFormat__");
                         var st = moment(startDateTime).format("__MSG_Calendar_TimeFormat__");
