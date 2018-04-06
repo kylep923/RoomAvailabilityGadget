@@ -87,7 +87,19 @@
             left: 0;
             color: #__UP_ForeColor__;
         }
-        #events p{
+
+        #events h3{
+            font-size: 1em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .currentEvent {
+            font-size: 1em;
+            color: #__UP_ForeColor__;
+        }
+
+        .nextEvent {
             font-size: 1em;
             padding-bottom: 0;
             padding-top: 0;
@@ -96,6 +108,7 @@
             padding-left: 5%;
             color: #__UP_ForeColor__;
         }
+
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
@@ -241,11 +254,11 @@
                             }
                         }
 
-                        h2 = $("<h2 class=\"where\"/>");
+                        h2 = $("<h2 />");
                         $(h2).text(event.location);
                         $(div).append(h2);
 
-                        h1 = $("<h1 class=\"title\"/>");
+                        h1 = $("<h1 />");
                         h1.text(event.summary);
                         $(div).append(h1);
 
@@ -259,7 +272,7 @@
                             var ed = moment(endDateTime).format("__MSG_Calendar_DateFormat__");
                         }
 
-                        var p = $("<p class=\"date\"/>");
+                        var p = $("<p class=\"currentEvent\"/>");
 
                         var time = '';
                         if (sd == ed) {
@@ -270,16 +283,16 @@
                         if (isAllDay) {
                             p.text(time);
                         } else {
-                            p.text(time + ", " + st + " - " + et);
+                            p.text(st + " - " + et);
                         }
                         $(div).append(p);
 
                     }else {
-                        h2 = $("<h2 class=\"where\"/>");
+                        h2 = $("<h2 />");
                         $(h2).text(nextEvent.location);
                         $(div).append(h2);
 
-                        h1 = $("<h1 class=\"title\"/>");
+                        h1 = $("<h1 />");
                         h1.text("Available");
                         $(div).append(h1);
                     }
@@ -309,11 +322,11 @@
                     $(h3).text("Next Event");
                     $(div).append(h3);
 
-                    var p2 = $("<p />");
+                    var p2 = $("<p class=\"nextEvent\"/>");
                     p2.text(nextEvent.summary);
                     $(div).append(p2);
 
-                    var p3 = $("<p />");
+                    var p3 = $("<p class=\"nextEvent\"/>");
 
                     var time2 = "";
                     if (nsd == ned) {
