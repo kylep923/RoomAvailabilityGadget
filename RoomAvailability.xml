@@ -76,8 +76,9 @@
 
         #events h1{
             font-size: 3em;
+            padding-bottom: 0;
+            margin-bottom: 0;
             color: #__UP_ForeColor__;
-
         }
 
         #events h2{
