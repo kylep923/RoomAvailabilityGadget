@@ -89,7 +89,6 @@
         }
         #events p{
             font-size: 1em;
-            float: right;
             color: #__UP_ForeColor__;
         }
         </style>
