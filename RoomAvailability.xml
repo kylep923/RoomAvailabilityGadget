@@ -141,7 +141,7 @@
 
         <div id="data">
             <div id="room">
-                __UP_searchQuery__
+                <h2>__UP_searchQuery__</h2>
             </div>
             <div id="event">
             </div>
