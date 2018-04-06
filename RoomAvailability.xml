@@ -56,9 +56,8 @@
 
         #data
         {
-          padding: 3% 5% 5% 8%;
-          height: 100%;
-          width: 100%;
+          width: __UP_rdW__px;
+          height: __UP_rdH__px;
           background-color: #__UP_BackColor__;
           height: __UP_rdH__px;
         }
@@ -68,8 +67,8 @@
           padding: 5% 5% 5% 5%;
           position: relative;
           font-size: 5vh;
-          height: 100%;
-          width: 100%;
+          width: __UP_rdW__px;
+          height: __UP_rdH__px;
           color: #__UP_ForeColor__;
           width: __UP_rdW__px;
         }
