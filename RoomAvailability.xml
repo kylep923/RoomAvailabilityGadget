@@ -300,11 +300,15 @@
                         var ned = moment(nextEndDateTime).format("__MSG_Calendar_DateFormat__");
                     }
 
-                    var p2 = $("<p class=\"date\"/>");
-                    p2.text("Next Event: " + nextEvent.summary);
+                    h3 = $("<h3 />");
+                    $(h3).text("Next Event");
+                    $(div).append(h3);
+
+                    var p2 = $("<p />");
+                    p2.text(nextEvent.summary);
                     $(div).append(p2);
 
-                    var p3 = $("<p class=\"date\"/>");
+                    var p3 = $("<p />");
 
                     var time2 = "";
                     if (nsd == ned) {
@@ -315,7 +319,7 @@
                     if (isAllDay) {
                         p3.text(time2);
                     } else {
-                        p3.text("Event Time: " + time2 + ", " + nst + " - " + net);
+                        p3.text(time2 + ", " + nst + " - " + net);
                     }
                     $(div).append(p3);
                 }
