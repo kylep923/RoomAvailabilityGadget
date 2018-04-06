@@ -75,17 +75,17 @@
         }
 
         #events h1{
-            font-size: 8vw;
+            font-size: 15vh;
             color: #__UP_ForeColor__;
 
         }
 
         #events h2{
-            font-size: 5vw;
+            font-size: 10vh;
             color: #__UP_ForeColor__;
         }
         #events p{
-            font-size: 2vw;
+            font-size: 5vh;
             color: #__UP_ForeColor__;
         }
 
