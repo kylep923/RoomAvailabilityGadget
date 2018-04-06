@@ -62,6 +62,14 @@
             background-color: #__UP_BackColor__;
         }
 
+        #room {
+            font-size: 1em;
+            position:absolute;
+            top: 0;
+            left: 1vw;
+            color: #__UP_ForeColor__;
+        }
+
         #event{
             color: #__UP_ForeColor__;
 
@@ -80,38 +88,24 @@
             color: #__UP_ForeColor__;
         }
 
-
-        #event h3{
+        .currentEvent {
             font-size: 1em;
-            padding-bottom: 0;
-            margin-bottom: 0;
-        }
-
-        #room {
-            font-size: 1em;
-            position:absolute;
-            top: 0;
-            left: 1vw;
             color: #__UP_ForeColor__;
         }
 
         #next {
             font-size: 1em;
             position:absolute;
+            width: __UP_rdW__px;
             bottom: 0;
             left: 1vw;
         }
 
-        #next h2{
+        #next h3{
             font-size: 1em;
-            position:absolute;
+            margin-bottom: 0;
             top: 0;
             left: 0;
-            color: #__UP_ForeColor__;
-        }
-
-        .currentEvent {
-            font-size: 1em;
             color: #__UP_ForeColor__;
         }
 
