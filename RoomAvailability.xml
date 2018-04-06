@@ -367,6 +367,10 @@
                     }
 
                     var p2 = $("<p class=\"date\"/>");
+                    p2.text("Next Event: " + nextEvent.summary);
+                    $(div).append(p2);
+
+                    var p3 = $("<p class=\"date\"/>");
 
                     var time2 = "";
                     if (nsd == ned) {
@@ -375,11 +379,11 @@
                         time2 += nsd + " - " + ned;
                     }
                     if (isAllDay) {
-                        p2.text(time2);
+                        p3.text(time2);
                     } else {
-                        p2.text("Next Event: " + nextEvent.summary + " " + time2 + ", " + nst + " - " + net);
+                        p3.text("Event Time: " + time2 + ", " + nst + " - " + net);
                     }
-                    $(div).append(p2);
+                    $(div).append(p3);
                 }
 
                 var docIdFromUrl = function (url) { return url.match(/[-\w]{25,}/); }
