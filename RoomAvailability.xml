@@ -89,73 +89,8 @@
         }
         #events p{
             font-size: 1em;
-            position: absolute;
             float: right;
             color: #__UP_ForeColor__;
-        }
-
-        table, div#events
-        {
-          width: __UP_rdW__px;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-        }
-
-        td, th
-        {
-          padding: 8px;
-        }
-
-        th
-        {
-          __UP_header-style__;
-        }
-
-        td
-        {
-          __UP_body-style__;
-        }
-
-        h2
-        {
-          padding: 0;
-          margin: 0 0 10px 0;
-          font-weight: normal;
-          __UP_header-style__;
-        }
-
-        h3
-        {
-          margin: 0;
-          padding: 0;
-          font-weight: normal;
-          __UP_body-style__;
-        }
-
-        img
-        {
-          float: left;
-          width: 200px;
-          margin-right: 10px;
-        }
-
-        .entry
-        {
-          padding: 20px 5px;
-          border-bottom: solid 1px #ccc;
-          clear:both;
-        }
-
-        .when
-        {
-          display:block;
-          opacity: 0.7;
-          margin-top: 2px;
-          font-weight: normal;
-          __UP_body-style__;
-          font-size: 80% !important;
         }
         </style>
 
