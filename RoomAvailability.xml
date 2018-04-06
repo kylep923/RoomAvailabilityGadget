@@ -66,7 +66,7 @@
             font-size: 1em;
             position:absolute;
             top: 0;
-            left: 1vw;
+            left: 2vw;
             color: #__UP_ForeColor__;
         }
 
@@ -74,7 +74,7 @@
             color: #__UP_ForeColor__;
 
             position: fixed;
-            top: 40%;
+            top: 50%;
             left: 50%;
             /* bring your own prefixes */
             transform: translate(-50%, -50%);
@@ -97,8 +97,8 @@
             font-size: 1em;
             position:absolute;
             width: __UP_rdW__px;
-            bottom: 0;
-            left: 1vw;
+            bottom: 2vw;
+            left: 2vw;
         }
 
         #next h3{
