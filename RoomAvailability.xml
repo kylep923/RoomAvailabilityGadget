@@ -260,28 +260,28 @@
                     });
                 }
 
-                function formatDiv(event, nextEvent) {
+                function formatDiv(currentEvent, nextEvent) {
                     var event = $("#event");
                     var next = $("#next");
 
-                    if (event !== 0){
-                        var startDateTime = event.start.dateTime ? event.start.dateTime : event.start.date;
-                        var endDateTime = event.end.dateTime ? event.end.dateTime : event.end.date;
+                    if (currentEvent !== 0){
+                        var startDateTime = currentEvent.start.dateTime ? currentEvent.start.dateTime : currentEvent.start.date;
+                        var endDateTime = currentEvent.end.dateTime ? currentEvent.end.dateTime : currentEvent.end.date;
 
                         var isAllDay = false;
                         if (startDateTime) {
-                            if (event.start.date) {
+                            if (currentEvent.start.date) {
                             isAllDay = true;
                             }
                         }
 
                         h2 = $("<h2 />");
-                        $(h2).text(event.location);
-                        $(event).append(h2);
+                        $(h2).text(currentEvent.location);
+                        $(currentEvent).append(h2);
 
                         h1 = $("<h1 />");
-                        h1.text(event.summary);
-                        $(event).append(h1);
+                        h1.text(currentEvent.summary);
+                        $(currentEvent).append(h1);
 
                         var sd = moment(startDateTime).format("__MSG_Calendar_DateFormat__");
                         var st = moment(startDateTime).format("__MSG_Calendar_TimeFormat__");
