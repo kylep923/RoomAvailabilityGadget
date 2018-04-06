@@ -57,35 +57,40 @@
         #data
         {
           padding: 3% 5% 5% 8%;
+          height: 100%;
+          width: 100%;
           background-color: #__UP_BackColor__;
           height: __UP_rdH__px;
-        }
-
-        #events table
-        {
-          color: #__UP_ForeColor__;
-          width: __UP_rdW__px;
         }
 
         #events
         {
           padding: 5% 5% 5% 5%;
+          position: relative;
+          font-size: 5vh;
+          height: 100%;
+          width: 100%;
           color: #__UP_ForeColor__;
           width: __UP_rdW__px;
         }
 
         #events h1{
-            font-size: 15vh;
+            font-size: 3em;
             color: #__UP_ForeColor__;
 
         }
 
         #events h2{
-            font-size: 10vh;
+            font-size: 1em;
+            position:absolute;
+            top: 0;
+            left: 0;
             color: #__UP_ForeColor__;
         }
         #events p{
-            font-size: 5vh;
+            font-size: 1em;
+            position: absolute;
+            float: right;
             color: #__UP_ForeColor__;
         }
 
