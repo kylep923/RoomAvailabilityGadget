@@ -54,34 +54,33 @@
           height: __UP_rdH__px;
         }
 
-        #data
-        {
-          padding: 3% 5% 5% 8%;
+        #data{
+          position: relative;
           width: __UP_rdW__px;
           height: __UP_rdH__px;
           background-color: #__UP_BackColor__;
           height: __UP_rdH__px;
         }
 
-        #events
-        {
-          padding: 5% 5% 5% 5%;
-          position: relative;
+        #event{
           font-size: 5vh;
-          width: __UP_rdW__px;
-          height: __UP_rdH__px;
           color: #__UP_ForeColor__;
-          width: __UP_rdW__px;
+
+          position: fixed;
+          top: 50%;
+            left: 50%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
         }
 
-        #events h1{
+        #event h1{
             font-size: 3em;
             padding-bottom: 0;
             margin-bottom: 0;
             color: #__UP_ForeColor__;
         }
 
-        #events h2{
+        #event h2{
             font-size: 1em;
             position:absolute;
             top: 0;
@@ -89,10 +88,25 @@
             color: #__UP_ForeColor__;
         }
 
-        #events h3{
+        #event h3{
             font-size: 1em;
             padding-bottom: 0;
             margin-bottom: 0;
+        }
+
+        #room {
+            font-size: 1em;
+            position:absolute;
+            top: 0;
+            left: 0;
+            color: #__UP_ForeColor__;
+        }
+
+        #next {
+            font-size: 1em;
+            position:absolute;
+            bottom: 0;
+            left: 0;
         }
 
         .currentEvent {
@@ -126,7 +140,12 @@
         <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 
         <div id="data">
-            <div id="events" class="scroll">
+            <div id="room">
+                __UP_searchQuery__
+            </div>
+            <div id="event">
+            </div>
+            <div id="next">
             </div>
         </div>
 
@@ -242,7 +261,8 @@
                 }
 
                 function formatDiv(event, nextEvent) {
-                    var div = $("#events");
+                    var event = $("#event");
+                    var next = $("#next");
 
                     if (event !== 0){
                         var startDateTime = event.start.dateTime ? event.start.dateTime : event.start.date;
@@ -257,11 +277,11 @@
 
                         h2 = $("<h2 />");
                         $(h2).text(event.location);
-                        $(div).append(h2);
+                        $(event).append(h2);
 
                         h1 = $("<h1 />");
                         h1.text(event.summary);
-                        $(div).append(h1);
+                        $(event).append(h1);
 
                         var sd = moment(startDateTime).format("__MSG_Calendar_DateFormat__");
                         var st = moment(startDateTime).format("__MSG_Calendar_TimeFormat__");
@@ -286,16 +306,16 @@
                         } else {
                             p.text(st + " - " + et);
                         }
-                        $(div).append(p);
+                        $(event).append(p);
 
                     }else {
                         h2 = $("<h2 />");
                         $(h2).text(nextEvent.location);
-                        $(div).append(h2);
+                        $(event).append(h2);
 
                         h1 = $("<h1 />");
                         h1.text("Available");
-                        $(div).append(h1);
+                        $(event).append(h1);
                     }
 
                     var nextStartDateTime = nextEvent.start.dateTime ? nextEvent.start.dateTime : nextEvent.start.date;
@@ -321,11 +341,11 @@
 
                     h3 = $("<h3 />");
                     $(h3).text("Next Event");
-                    $(div).append(h3);
+                    $(next).append(h3);
 
                     var p2 = $("<p class=\"nextEvent\"/>");
                     p2.text(nextEvent.summary);
-                    $(div).append(p2);
+                    $(next).append(p2);
 
                     var p3 = $("<p class=\"nextEvent\"/>");
 
@@ -340,7 +360,7 @@
                     } else {
                         p3.text(time2 + ", " + nst + " - " + net);
                     }
-                    $(div).append(p3);
+                    $(next).append(p3);
                 }
 
                 var docIdFromUrl = function (url) { return url.match(/[-\w]{25,}/); }
