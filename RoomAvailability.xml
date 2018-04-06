@@ -41,33 +41,32 @@
     <style type="text/css">
         body *
         {
-          line-height: 1.2em;
-          letter-spacing: 0;
-          word-spacing: normal;
+            line-height: 1.2em;
+            letter-spacing: 0;
+            word-spacing: normal;
         }
 
         body
         {
-          overflow: hidden;
-          background: transparent;
-          width: __UP_rdW__px;
-          height: __UP_rdH__px;
+            overflow: hidden;
+            background: transparent;
+            width: __UP_rdW__px;
+            height: __UP_rdH__px;
         }
 
         #data{
-          position: relative;
-          width: __UP_rdW__px;
-          height: __UP_rdH__px;
-          background-color: #__UP_BackColor__;
-          height: __UP_rdH__px;
+            font-size: 5vh;
+            position: relative;
+            width: __UP_rdW__px;
+            height: __UP_rdH__px;
+            background-color: #__UP_BackColor__;
         }
 
         #event{
-          font-size: 5vh;
-          color: #__UP_ForeColor__;
+            color: #__UP_ForeColor__;
 
-          position: fixed;
-          top: 50%;
+            position: fixed;
+            top: 40%;
             left: 50%;
             /* bring your own prefixes */
             transform: translate(-50%, -50%);
@@ -77,16 +76,10 @@
             font-size: 3em;
             padding-bottom: 0;
             margin-bottom: 0;
+            margin-top: 0;
             color: #__UP_ForeColor__;
         }
 
-        #event h2{
-            font-size: 1em;
-            position:absolute;
-            top: 0;
-            left: 0;
-            color: #__UP_ForeColor__;
-        }
 
         #event h3{
             font-size: 1em;
@@ -98,7 +91,7 @@
             font-size: 1em;
             position:absolute;
             top: 0;
-            left: 0;
+            left: 1vw;
             color: #__UP_ForeColor__;
         }
 
@@ -106,7 +99,15 @@
             font-size: 1em;
             position:absolute;
             bottom: 0;
+            left: 1vw;
+        }
+
+        #next h2{
+            font-size: 1em;
+            position:absolute;
+            top: 0;
             left: 0;
+            color: #__UP_ForeColor__;
         }
 
         .currentEvent {
@@ -218,16 +219,13 @@
                     queryParams += '&timeMax=' + encodeURIComponent(max);
 
                     if (prefs.getString("searchQuery") != '') {
-                    queryParams += '&q=' + encodeURIComponent(prefs.getString("searchQuery"));
+                        queryParams += '&q=' + encodeURIComponent(prefs.getString("searchQuery"));
                     }
 
                     var url = 'https://www.googleapis.com/calendar/v3/calendars/' + googleUrl("h4ncmnfsieg6mgrknsjqq5f39o@group.calendar.google.com") + '/events?key=' + key + queryParams;
 
-                    // if ("table" != "table") {
-                    $("#events").empty();
-                    // } else {
-                    //     $("#events > table > tbody").empty();
-                    // }
+                    $("#event").empty();
+                    $("#next").empty();
 
                     $.ajax({
                         type: 'GET',
@@ -275,10 +273,6 @@
                             }
                         }
 
-                        h2 = $("<h2 />");
-                        $(h2).text(currentEvent.location);
-                        $(currentEvent).append(h2);
-
                         h1 = $("<h1 />");
                         h1.text(currentEvent.summary);
                         $(currentEvent).append(h1);
@@ -309,10 +303,6 @@
                         $(event).append(p);
 
                     }else {
-                        h2 = $("<h2 />");
-                        $(h2).text(nextEvent.location);
-                        $(event).append(h2);
-
                         h1 = $("<h1 />");
                         h1.text("Available");
                         $(event).append(h1);
