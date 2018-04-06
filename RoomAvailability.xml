@@ -72,7 +72,8 @@
 
         #event{
             color: #__UP_ForeColor__;
-
+            width: __UP_rdW__px;
+            text-align: center;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -96,7 +97,6 @@
         #next {
             font-size: 1em;
             position:absolute;
-            width: __UP_rdW__px;
             bottom: 2vw;
             left: 2vw;
         }
